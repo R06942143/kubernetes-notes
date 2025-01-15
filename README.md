@@ -182,3 +182,106 @@ To temporarily use kubectl without colors, you can either:
 1. Use `command kubectl` instead of `kubectl`
 2. Use the full path `/usr/local/bin/kubectl`
 </details>
+
+### Install Kubectx (Optional - for easy context switching)
+<details>
+<summary>MacOS (Apple Silicon)</summary>
+
+```bash
+# Using Homebrew
+brew install kubectx
+
+# Test the installation
+kubectx
+kubens
+
+# Add alias to your shell configuration file (optional)
+echo 'alias kctx="kubectx"' >> ~/.zshrc
+echo 'alias kns="kubens"' >> ~/.zshrc
+
+# Reload shell configuration
+source ~/.zshrc
+```
+</details>
+
+<details>
+<summary>WSL (Windows Subsystem for Linux)</summary>
+
+```bash
+# Download kubectx and kubens
+sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
+
+# Create symbolic links
+sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+
+# Add alias to your shell configuration file (optional)
+echo 'alias kctx="kubectx"' >> ~/.zshrc
+echo 'alias kns="kubens"' >> ~/.zshrc
+
+# Reload shell configuration
+source ~/.zshrc
+
+# Test the installation
+kubectx
+kubens
+```
+</details>
+
+<details>
+<summary>Additional Kubectx Usage</summary>
+
+Common commands:
+```bash
+# List all contexts
+kubectx
+
+# Switch to a different context
+kubectx <context-name>
+
+# Switch to previous context
+kubectx -
+
+# List all namespaces
+kubens
+
+# Switch to a different namespace
+kubens <namespace-name>
+
+# Switch to previous namespace
+kubens -
+```
+</details>
+
+### Docker Installation for WSL
+<details>
+<summary>Recommended: Docker Desktop</summary>
+
+1. Download and install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+2. Enable WSL2 integration in Docker Desktop settings:
+   - Open Docker Desktop
+   - Go to Settings > Resources > WSL Integration
+   - Enable "Ubuntu" (or your WSL distro)
+3. Verify installation in WSL:
+```bash
+docker --version
+docker ps
+```
+</details>
+
+<details>
+<summary>Alternative: Script Installation (Not Recommended)</summary>
+
+```bash
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo service docker start
+```
+
+Note: This method is not recommended because:
+- Requires manual updates
+- No GUI interface
+- Limited WSL integration
+- May require additional configuration
+- No built-in Kubernetes support
+</details>
